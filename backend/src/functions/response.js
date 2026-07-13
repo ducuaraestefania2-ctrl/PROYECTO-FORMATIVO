@@ -1,0 +1,20 @@
+const successResponse = (message, data = {}) => {
+    return {
+        status: "success",
+        message,
+        data
+    };
+};
+
+const errorResponse = (message, error = {}) => {
+    return {
+        status: "error",
+        message,
+        error
+    };
+};
+
+module.exports = {
+    successResponse,
+    errorResponse
+};
