@@ -32,20 +32,25 @@ const getMountingById = async (id) => {
     return mountingid;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
 
 // Inactivar monta
 const deleteMounting = async (id) => {
-  try {
-    const deleteMounting = await mounting.destroy({ where: { id } });
-    return deleteMounting;
-  } catch (error) {
-    console.log(error);
-  }
+    try {
+        return await mounting.update(
+            { active: 0 },
+            {
+                where: { id }
+            }
+        );
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
 };
-
 
 // Actualizar monta
 const updateMounting = async (id, data) => {
@@ -54,6 +59,7 @@ const updateMounting = async (id, data) => {
     return updateMounting;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 

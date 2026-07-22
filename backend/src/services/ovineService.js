@@ -38,12 +38,17 @@ const getOvineById = async (id) => {
 
 // Inactivar ovino
 const deleteOvine = async (id) => {
-  try {
-    const deleteOvine = await ovine.destroy({ where: { id } });
-    return deleteOvine;
-  } catch (error) {
-    console.log(error);
-  }
+    try {
+        return await ovine.update(
+            { active: 0 },
+            {
+                where: { id }
+            }
+        );
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
 };
 
 
