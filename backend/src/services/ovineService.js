@@ -2,9 +2,9 @@ const ovine = require("../models/ovineModel");
 
 
 // Crear ovino
-const createOvine = async (data) => {
+const createOvineService = async (data) => {
   try {
-    const newOvine = await new ovine(data);
+    const newOvine = await  ovine.create(data);
     return newOvine;
   } catch (error) {
     console.log(error);
@@ -64,7 +64,7 @@ const updateOvine = async (id, data) => {
 
 
 module.exports = {
-  createOvine,
+  createOvineService,
   getAllOvines,
   getOvineById,
   deleteOvine,

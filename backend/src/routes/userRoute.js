@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 const {
@@ -11,18 +11,18 @@ const {
 
 /**
  * @swagger
- * /api/user/users:
+ * /api/user:
  *   get:
  *     summary: Obtener todos los usuarios
  *     responses:
  *       200:
  *         description: Lista de usuarios
  */
-router.get("/users", getAllUsers);
+router.get("/", getAllUsers);
 
 /**
  * @swagger
- * /api/user/users/{id}:
+ * /api/user/{id}:
  *   get:
  *     summary: Obtener usuario por ID
  *     parameters:
@@ -35,22 +35,22 @@ router.get("/users", getAllUsers);
  *       200:
  *         description: Usuario encontrado
  */
-router.get("/users/:id", getUserById);
+router.get("/:id", getUserById);
 
 /**
  * @swagger
- * /api/user/users:
+ * /api/user:
  *   post:
  *     summary: Crear usuario
  *     responses:
  *       201:
  *         description: Usuario creado
  */
-router.post("/users", createUser);
+router.post("/", createUser);
 
 /**
  * @swagger
- * /api/user/users/{id}:
+ * /api/user/{id}:
  *   put:
  *     summary: Actualizar usuario
  *     parameters:
@@ -63,11 +63,11 @@ router.post("/users", createUser);
  *       200:
  *         description: Usuario actualizado
  */
-router.put("/users/:id", updateUser);
+router.put("/:id", updateUser);
 
 /**
  * @swagger
- * /api/user/users/{id}:
+ * /api/user/{id}:
  *   delete:
  *     summary: Eliminar usuario
  *     parameters:
@@ -80,6 +80,6 @@ router.put("/users/:id", updateUser);
  *       200:
  *         description: Usuario eliminado
  */
-router.delete("/users/:id", deleteUser);
+router.delete("/:id", deleteUser);
 
 module.exports = router;

@@ -1,30 +1,79 @@
 const {
     createOvineService,
+    getAllOvines,
+    getOvineById,
     updateOvine: updateOvineService,
     deleteOvine: deleteOvineService
 } = require("../services/ovineService");
 
-const { Response } = require("../functions/response");
+const  Response  = require("../functions/response");
 
 // Obtener todos los ovinos
-const getAllOvines = (req, res) => {
+const getAllOvine = async (req, res) => {
 
-    const body = req.body;
-    console.log("Body recibido:", body);
+    try {
 
-    res.status(200).json({
-        mensaje: "Obteniendo todos los ovinos"
-    });
+        const ovines = await getAllOvines();
+
+        const response = new Response(
+            true,
+            "Registros encontrados",
+            ovines
+        );
+
+        return res.status(200).json(response.json);
+
+    } catch (error) {
+
+        const response = new Response(
+            false,
+            "Error al obtener los ovinos",
+            error.message
+        );
+
+        return res.status(500).json(response.json);
+    }
+
 };
-
 // Obtener ovino por ID
-const getOvineById = (req, res) => {
+const getOvineByIdController = async (req, res) => {
 
-    const { id } = req.params;
+    try {
 
-    res.json({
-        mensaje: `Obteniendo el ovino con ID: ${id}`
-    });
+        const { id } = req.params;
+
+        const ovine = await getOvineById(id);
+
+        if (!ovine) {
+
+            const response = new Response(
+                false,
+                "Ovino no encontrado",
+                null
+            );
+
+            return res.status(404).json(response.json);
+        }
+
+        const response = new Response(
+            true,
+            "Registro encontrado",
+            ovine
+        );
+
+        return res.status(200).json(response.json);
+
+    } catch (error) {
+
+        const response = new Response(
+            false,
+            "Error al obtener el ovino",
+            error.message
+        );
+
+        return res.status(500).json(response.json);
+    }
+
 };
 
 // Crear ovino
@@ -182,8 +231,8 @@ const deleteOvine = async (req, res) => {
 };
 
 module.exports = {
-    getAllOvines,
-    getOvineById,
+    getAllOvine,
+    getOvineById: getOvineByIdController,
     createOvine,
     updateOvine,
     deleteOvine

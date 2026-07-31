@@ -6,7 +6,8 @@ const {
 
 const { Response } = require("../functions/response");
 
-const getAllMortalities = (req, res) => {
+
+const getAllMortality = (req, res) => {
 
     const body = req.body;
     console.log("Body recibido:", body);
@@ -16,6 +17,7 @@ const getAllMortalities = (req, res) => {
     });
 };
 
+
 const getMortalityById = (req, res) => {
 
     const { id } = req.params;
@@ -24,6 +26,7 @@ const getMortalityById = (req, res) => {
         mensaje: `Obteniendo la mortalidad con ID: ${id}`
     });
 };
+
 
 const createMortality = async (req, res) => {
 
@@ -38,7 +41,7 @@ const createMortality = async (req, res) => {
 
     let errors = [];
 
-    if (!date || !ovine_id || !cause || !postJob || ! active || !description) {
+    if (!date || !ovine_id || !cause || !postJob || !active || !description) {
         errors.push("Todos los campos son obligatorios");
     }
 
@@ -46,8 +49,9 @@ const createMortality = async (req, res) => {
     if (ovine_id === "") errors.push("El campo ovine_id no puede estar vacío");
     if (cause === "") errors.push("El campo cause no puede estar vacío");
     if (postJob === "") errors.push("El campo postJob no puede estar vacío");
-    if (active === "") errors.push("El campo activete no puede estar vacío");
+    if (active === "") errors.push("El campo active no puede estar vacío");
     if (description === "") errors.push("El campo description no puede estar vacío");
+
 
     if (errors.length > 0) {
 
@@ -60,6 +64,7 @@ const createMortality = async (req, res) => {
         return res.status(400).json(response.json);
     }
 
+
     const data = {
         date,
         ovine_id,
@@ -68,6 +73,7 @@ const createMortality = async (req, res) => {
         active,
         description
     };
+
 
     try {
 
@@ -80,6 +86,7 @@ const createMortality = async (req, res) => {
         );
 
         return res.status(201).json(response.json);
+
 
     } catch (error) {
 
@@ -94,6 +101,8 @@ const createMortality = async (req, res) => {
         return res.status(500).json(response.json);
     }
 };
+
+
 
 const updateMortality = async (req, res) => {
 
@@ -110,19 +119,22 @@ const updateMortality = async (req, res) => {
             description
         } = req.body;
 
+
         const updatedMortality = await updateMortalityService(id, {
-              date,
-              ovine_id,
-              cause,
-              postJob,
-              active,
-              description
+            date,
+            ovine_id,
+            cause,
+            postJob,
+            active,
+            description
         });
+
 
         return res.status(200).json({
             mensaje: `Mortalidad actualizada con ID: ${id}`,
             mortality: updatedMortality
         });
+
 
     } catch (error) {
 
@@ -138,6 +150,8 @@ const updateMortality = async (req, res) => {
     }
 };
 
+
+
 const deleteMortality = async (req, res) => {
 
     try {
@@ -146,15 +160,20 @@ const deleteMortality = async (req, res) => {
 
         const [updated] = await deleteMortalityService(id);
 
+
         if (updated === 0) {
+
             return res.status(404).json({
                 mensaje: "Mortalidad no encontrada"
             });
+
         }
+
 
         return res.status(200).json({
             mensaje: `Mortalidad con ID ${id} inactivada correctamente`
         });
+
 
     } catch (error) {
 
@@ -166,8 +185,10 @@ const deleteMortality = async (req, res) => {
     }
 };
 
+
+
 module.exports = {
-    getAllMortalities,
+    getAllMortality,
     getMortalityById,
     createMortality,
     updateMortality,

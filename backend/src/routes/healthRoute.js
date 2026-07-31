@@ -2,18 +2,23 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    getAllHealthRecords,
-    getHealthRecordById,
-    createHealthRecord,
-    updateHealthRecord,
-    deleteHealthRecord
+    getAllHealths,
+    getHealthById,
+    createHealth,
+    updateHealth,
+    deleteHealth
 } = require("../controllers/healthController");
 
-router.get("", getAllHealthRecords);
-router.post("", createHealthRecord);
 
-router.get("/:id", getHealthRecordById);
-router.put("/:id", updateHealthRecord);
-router.delete("/:id", deleteHealthRecord);
+router.get("", getAllHealths);
+
+router.post("", createHealth);
+
+router.get("/:id", getHealthById);
+
+router.put("/:id", updateHealth);
+
+router.delete("/:id", deleteHealth);
+
 
 module.exports = router;

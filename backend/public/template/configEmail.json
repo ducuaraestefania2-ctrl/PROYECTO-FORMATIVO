@@ -1,0 +1,10 @@
+{
+    "subject": "Confirmación de  correo electrónico",
+    "html": "public/template/configEmail.html",
+    "params": {
+        "@name": "Tania",
+        "@Link": "http://localhost:3000/confirm-email",
+        "@nameBtn": "confirmar cuenta",
+        "@cuentaempresa": "OVIADSO"
+    }
+}

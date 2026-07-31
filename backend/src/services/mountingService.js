@@ -1,17 +1,15 @@
 const mounting = require("../models/mountingModel");
 
-
 // Crear monta
-const createMounting = async (data) => {
+const createMountingService = async (data) => {
   try {
-    const newMounting = await new mounting(data);
+    const newMounting = await mounting.create(data);
     return newMounting;
   } catch (error) {
     console.log(error);
     throw error;
   }
 };
-
 
 // Obtener todas las montas
 const getAllMountings = async () => {
@@ -24,50 +22,51 @@ const getAllMountings = async () => {
   }
 };
 
-
-// Obtener monta por id
+// Obtener monta por ID
 const getMountingById = async (id) => {
   try {
-    const mountingid = await mounting.findOne({ where: { id } });
-    return mountingid;
+    const mountingId = await mounting.findOne({
+      where: { id }
+    });
+
+    return mountingId;
   } catch (error) {
     console.log(error);
     throw error;
   }
 };
 
-
 // Inactivar monta
 const deleteMounting = async (id) => {
-    try {
-        return await mounting.update(
-            { active: 0 },
-            {
-                where: { id }
-            }
-        );
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
+  try {
+    return await mounting.update(
+      { active: 0 },
+      {
+        where: { id }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 };
 
 // Actualizar monta
 const updateMounting = async (id, data) => {
   try {
-    const updateMounting = await mounting.update(data, { where: { id } });
-    return updateMounting;
+    return await mounting.update(data, {
+      where: { id }
+    });
   } catch (error) {
     console.log(error);
     throw error;
   }
 };
 
-
 module.exports = {
-  createMounting,
+  createMountingService,
   getAllMountings,
   getMountingById,
   deleteMounting,
-  updateMounting,
+  updateMounting
 };

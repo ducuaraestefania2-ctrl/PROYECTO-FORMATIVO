@@ -1,7 +1,7 @@
 const user = require("../models/userModel");
 
 // Crear usuario
-const createUser = async (data) => {
+const createUserService = async (data) => {
   try {
     const newUser = await user.create(data);
     return newUser;
@@ -25,10 +25,10 @@ const getAllUsers = async () => {
 };
 
 // Obtener usuario por ID
-const getIdUsers = async (id) => {
+const getUserById = async (id) => {
     try {
-        const users = await user.findByPk(id);
-        return users;
+        const userFound = await user.findByPk(id);
+        return userFound;
     } catch (error) {
         throw error;
     }
@@ -61,9 +61,9 @@ const updateUser = async (id, data) => {
 };
 
 module.exports = {
-    createUser,
+    createUserService,
     getAllUsers,
-    getIdUsers,
+    getUserById,
     deleteIdUsers,
     updateUser
 };

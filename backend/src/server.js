@@ -3,6 +3,9 @@ require("dotenv").config();
 const helmet = require("helmet");
 const morgan = require("morgan");
 const path = require("path");
+const cors = require("cors");
+
+//const { sendEmail } = require("./services/emailService");
 
 const db = require("./config/conectionDB");
 db.authenticate()
@@ -27,6 +30,7 @@ const feedingRoute = require("./routes/feedingRoute");
 const birthRoute = require("./routes/birthRoute");
 const responsiblesRoute = require("./routes/responsiblesRoute");
 const authRouter = require("./routes/authRoute");
+//const emailRoute = require("./routes/emailRoute");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -63,6 +67,7 @@ app.use(
 );
 
 // Registro de Rutas de la API
+app.use(cors());
 app.use("/api/user", userRoute);
 app.use("/api/mortality", mortalityRoute);
 app.use("/api/mounting", mountingRoute);
@@ -74,6 +79,7 @@ app.use("/api/feeding", feedingRoute);
 app.use("/api/birth", birthRoute);
 app.use("/api/responsibles", responsiblesRoute);
 app.use("/api/auth", authRouter);
+//app.use("/api/email", emailRoute);
 
 app.get("/", (req, res) => {
     res.send("Servidor funcionando");

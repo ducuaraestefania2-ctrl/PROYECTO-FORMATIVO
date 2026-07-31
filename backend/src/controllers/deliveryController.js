@@ -8,7 +8,7 @@ const { Response } = require("../functions/response");
 
 
 
-const getAllDeliveries = (req, res) => {
+const getAllDelivery = (req, res) => {
 
     const body = req.body;
     console.log("Body recibido:", body);
@@ -77,7 +77,6 @@ const createDelivery = async (req, res) => {
             errors
         );
 
-    
         return res.status(400).json(response.json);
     }
 
@@ -93,8 +92,7 @@ const createDelivery = async (req, res) => {
         postJob,
         active,
         notes,
-        status,
-        
+        status
 
     };
 
@@ -102,20 +100,18 @@ const createDelivery = async (req, res) => {
 
     try {
 
-    const delivery = await createDeliveryService(data);
-    
+        const delivery = await createDeliveryService(data);
 
 
-    const response = new Response(
-        true,
-        "Parto registrado exitosamente",
-         delivery
-);
+        const response = new Response(
+            true,
+            "Parto registrado exitosamente",
+            delivery
+        );
 
-    return res.status(201).json(response.json);
+        return res.status(201).json(response.json);
 
-       
-        
+
     } catch (error) {
 
         console.error("Error al registrar el parto:", error);
@@ -137,6 +133,7 @@ const createDelivery = async (req, res) => {
 
 
 const updateDelivery = async (req, res) => {
+
     try {
 
         const { id } = req.params;
@@ -153,6 +150,7 @@ const updateDelivery = async (req, res) => {
             status
         } = req.body;
 
+
         const updatedDelivery = await updateDeliveryService(id, {
             date,
             mother_id,
@@ -165,14 +163,17 @@ const updateDelivery = async (req, res) => {
             status
         });
 
+
         return res.status(200).json({
             mensaje: `Parto actualizado con ID: ${id}`,
             delivery: updatedDelivery
         });
 
+
     } catch (error) {
 
         console.error("Error al actualizar el parto:", error);
+
 
         const response = new Response(
             false,
@@ -180,43 +181,57 @@ const updateDelivery = async (req, res) => {
             error.message
         );
 
+
         return res.status(500).json(response.json);
     }
+
 };
 
 
+
 const deleteDelivery = async (req, res) => {
+
     try {
+
         const { id } = req.params;
+
 
         const [updated] = await deleteDeliveryService(id);
 
+
         if (updated === 0) {
+
             return res.status(404).json({
                 mensaje: "Parto no encontrado"
             });
+
         }
+
 
         return res.status(200).json({
             mensaje: `Parto con ID ${id} inactivado correctamente`
         });
 
+
     } catch (error) {
+
         console.error(error);
+
 
         return res.status(500).json({
             mensaje: "Error al inactivar el parto"
         });
+
     }
+
 };
 
 
 
-   module.exports = {
-    getAllDeliveries,
+module.exports = {
+    getAllDelivery,
     getDeliveryById,
     createDelivery,
     updateDelivery,
     deleteDelivery
-
 };

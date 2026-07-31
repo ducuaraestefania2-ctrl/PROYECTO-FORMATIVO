@@ -3,25 +3,25 @@ const router = express.Router();
 
 const {
     getAllBirths,
-    getBirthsById,
-    createBirths,
-    updateBirths,
-    deleteBirths
-} = require("../controllers/birthsController.js");
+    getBirthById,
+    createBirth,
+    updateBirth,
+    deleteBirth,
+} = require("../controllers/birthController.js");
 
 // Obtener todos los nacimientos
 router.get("/births", getAllBirths);
 
 // Obtener nacimiento por ID
-router.get("/births/:id", getBirthsById);
+router.get("/births/:id", getBirthById);
 
 // Crear nacimiento
-router.post("/births", createBirths);
+router.post("/births", createBirth);
 
 // Actualizar nacimiento
-router.put("/births/:id", updateBirths);
+router.put("/births/:id", updateBirth);
 
 // Eliminar nacimiento
-router.delete("/births/:id", deleteBirths);
+router.delete("/births/:id", deleteBirth);
 
 module.exports = router;

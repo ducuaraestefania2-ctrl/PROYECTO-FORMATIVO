@@ -185,5 +185,5 @@ module.exports = {
     getHealthById,
     createHealth,
     updateHealth,
-    deleteHealth
+    deleteHealth,
 };

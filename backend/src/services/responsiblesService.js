@@ -1,4 +1,4 @@
-const responsible = require("../models/responsibleModel");
+const responsible = require("../models/responsiblesModel");
 
 
 // Crear responsable
